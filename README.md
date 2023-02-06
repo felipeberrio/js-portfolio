@@ -13,4 +13,16 @@
 3. Instalamos el plugin de html en webpack para utilizarlo con: 
     npm i html-webpack-plugin -D y agregamos el plugin dentro de nuestra configuración webpack
 
+4. Instalamos el paquete de css en webpack: y en nuestro archivo index.js añadimos la importación: import './styles/main.css';
+    npm i mini-css-extract-plugin css-loader -D
 
+                npm i -D node-sass sass-loader
+
+                Añadimos el loader al arreglo de loaders y modificamos un poco la expresion regular
+
+            {
+                    test: /\.s?css$/,
+                    use: [MiniCssExtractPlugin.loader,
+                        "css-loader",
+                        "sass-loader"]
+                },

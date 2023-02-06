@@ -1,5 +1,6 @@
 const path = require('path'); //Requerimos path que ya esta instalada
 const HtmlWebpackPlugin = require('html-webpack-plugin') //Requerimos el plugin instalado de html
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = { // añadimos los módulos
     entry: './src/index.js',
@@ -15,13 +16,21 @@ module.exports = { // añadimos los módulos
           {
             // Test declara que extensión de archivos aplicara el loader
             test: /\.js$/,
+            // Exclude permite omitir archivos o carpetas especificas
+            exclude: /node_modules/,
             // Use es un arreglo u objeto donde dices que loader aplicaras
             use: {
               loader: "babel-loader"
-            },
-            // Exclude permite omitir archivos o carpetas especificas
-            exclude: /node_modules/
-          }
+            }
+          },
+          {
+            test: /\.(css|styl)$/i,
+            use: [
+              MiniCssExtractPlugin.loader,
+              "css-loader",
+              "stylus-loader"
+            ]
+          },
         ]
       },
       // SECCION DE PLUGINS
@@ -30,6 +39,7 @@ module.exports = { // añadimos los módulos
             inject: true, // INYECTA EL BUNDLE AL TEMPLATE HTML
             template: './public/index.html', // LA RUTA AL TEMPLATE HTML
             filename: './index.html' // NOMBRE FINAL DEL ARCHIVO
-        })
+        }),
+        new MiniCssExtractPlugin(),
     ]
 }
