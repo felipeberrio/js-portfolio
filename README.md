@@ -26,3 +26,9 @@
                         "css-loader",
                         "sass-loader"]
                 },
+
+    Intalamos styluss: npm install stylus stylus-loader -D
+
+5. Para copiar archivos con webpack: npm icopy-webpack-plugin -D
+
+6. Para utilizar las rutas para las fonts usamos: npm install url-loader file-loader -D
