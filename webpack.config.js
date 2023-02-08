@@ -12,7 +12,14 @@ module.exports = { // añadimos los módulos
     },
     resolve: {
         extensions: ['.js'],// Agregamos que tipo de extenciones manejara webpack IMPORTANTE
+        alias: {
+          '@utils': path.resolve(__dirname, 'src/utils'), // Alias ⇒ nos permiten otorgar nombres paths específicos evitando los paths largos
+          '@templates': path.resolve(__dirname, 'src/templates'), 
+          '@styles': path.resolve(__dirname, 'src/styles'), 
+          '@images': path.resolve(__dirname, 'src/assets/images'), 
+        },
     },
+    
     module: {
         rules: [
           {
@@ -63,21 +70,26 @@ module.exports = { // añadimos los módulos
           }
         ]
       },
+      optimization: {
+        minimize: true,
+      },
       // SECCION DE PLUGINS
-    plugins: [
+      plugins: [
         new HtmlWebpackPlugin({ // CONFIGURACIÓN DEL PLUGIN
             inject: true, // INYECTA EL BUNDLE AL TEMPLATE HTML
             template: './public/index.html', // LA RUTA AL TEMPLATE HTML
             filename: './index.html' // NOMBRE FINAL DEL ARCHIVO
         }),
-        new MiniCssExtractPlugin(),
-        // new CopyPlugin({
-        //   patterns: [
-        //     {
-        //       from: path.resolve(__dirname, "src", "assets/images"),
-        //       to: "assets/images"
-        //     }
-        //   ]
-        // })
-    ]
+        new MiniCssExtractPlugin({
+          filename: 'assets/[name].[contenthash].css'
+        }),
+        new CopyPlugin({
+          patterns: [
+            {
+              from: path.resolve(__dirname, "src", "assets/images"),
+              to: "assets/images"
+            }
+          ]
+        })
+    ],
 }
