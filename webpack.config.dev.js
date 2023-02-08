@@ -2,8 +2,8 @@ const path = require('path'); //Requerimos path que ya esta instalada
 const HtmlWebpackPlugin = require('html-webpack-plugin') //Requerimos el plugin instalado de html
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+// const CssMinimizerPlugin = require('css-minimizer-webpack-plugin'); // En Modo desarrollo no es necesario optimizar el Css
+// const TerserPlugin = require('terser-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = { // añadimos los módulos
@@ -13,6 +13,7 @@ module.exports = { // añadimos los módulos
         path: path.resolve(__dirname,'dist'), // traemos el path que traemos al comienzo para usar resolve, que sirve para que localice la carpeta dist de output
         assetModuleFilename: 'assets/[hash][ext][query]'
     },
+    mode: 'development',
     resolve: {
         extensions: ['.js'],// Agregamos que tipo de extenciones manejara webpack IMPORTANTE
         alias: {
@@ -93,11 +94,11 @@ module.exports = { // añadimos los módulos
           }),
           new Dotenv(),
         ],
-        optimization: {
-          minimize: true,
-          minimizer: [
-            new CssMinimizerPlugin(),
-            new TerserPlugin()
-          ]
-        },
+        // optimization: {  // En Modo desarrollo no es necesario optimizar el Css
+        //   minimize: true,
+        //   minimizer: [
+        //     new CssMinimizerPlugin(),
+        //     new TerserPlugin()
+        //   ]
+        // },
 }

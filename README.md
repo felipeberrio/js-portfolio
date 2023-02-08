@@ -32,3 +32,11 @@
 5. Para copiar archivos con webpack: npm icopy-webpack-plugin -D
 
 6. Para utilizar las rutas para las fonts usamos: npm install url-loader file-loader -D
+
+7. Ya que cada vez que usamos npm run dev - run build ó demás nos crea nuevos archivos, para elinarlos utilizamos:
+    Remove-Item -Force -Recurse -Path <ruta del directorio>
+    Remove-Item -Force -Recurse -Path ./dist ; npm run build // Borramos la carpeta y la creamos con nuestro código
+
+    Linux: rm -rf dist && npm run build
+
+8. 
